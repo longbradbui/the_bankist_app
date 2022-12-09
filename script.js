@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
-////////////// User  Data //////////////////////
+///////////// User  Account ////////////////////
 ///////////////////////////////////////////////
 
 const account1 = {
@@ -80,7 +80,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 //////////////// Functions ///////////////////////
 /////////////////////////////////////////////////
 
-// DISPLAY MOVEMENTS DATE
+// DISPLAYING MOVEMENTS DATE //
 const formatMovementDate = function (date, locale) {
   const calcDayPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24)); // millisecond * second * minute * hour
@@ -90,13 +90,9 @@ const formatMovementDate = function (date, locale) {
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
   else return new Intl.DateTimeFormat(locale).format(date);
-  // const day = `${date.getDate()}`.padStart(2, 0);
-  // const month = `${date.getMonth() + 1}`.padStart(2, 0);
-  // const year = date.getFullYear();
-  // return `${day}/${month}/${year}`;
 };
 
-// FORMAT USER CURRENCY
+// FORMATTING USERS' CURRENCY //
 const formatCurrency = function (value, locale, userCurrency) {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
@@ -104,7 +100,7 @@ const formatCurrency = function (value, locale, userCurrency) {
   }).format(value);
 };
 
-// DISPLAY USER MOVEMENTS
+// DISPLAYING USER TRANSACTIONS //
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
   const movs = sort
@@ -129,7 +125,7 @@ const displayMovements = function (acc, sort = false) {
   });
 };
 
-// CALCULATE BANK BALANCE
+// CALCULATING BANK BALANCE //
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${formatCurrency(
@@ -139,7 +135,7 @@ const calcDisplayBalance = function (acc) {
   )}`;
 };
 
-// CALCULATE MONEY IN MONEY OUT
+// CALCULATING MONEY IN MONEY OUT //
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
@@ -173,7 +169,7 @@ const calcDisplaySummary = function (acc) {
   )}`;
 };
 
-// CREATE ACCOUNT 'USERNAME'
+// CREATING ACCOUNT 'USERNAME' //
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
